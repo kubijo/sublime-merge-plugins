@@ -19,3 +19,21 @@
 [submodule "sublime-yarn-lock"]
 	path = sublime-yarn-lock
 	url = https://github.com/alexkuz/sublime-yarn-lock.git
+[submodule "GraphQL"]
+	path = GraphQL
+	url = https://github.com/graphql-python/GraphQL-SublimeText.git
+[submodule "DotENV"]
+	path = DotENV
+	url = https://github.com/nathan-appere/Sublime-DotENV.git
+[submodule "Dockerfile"]
+	path = Dockerfile
+	url = https://github.com/jaytaylor/Dockerfile.sublime-syntax.git
+[submodule "TOML"]
+	path = TOML
+	url = https://github.com/lmno/TOML.git
+[submodule "Vue"]
+	path = Vue
+	url = https://github.com/vuejs/vue-syntax-highlight.git
+[submodule "TailwindCSS"]
+	path = TailwindCSS
+	url = https://github.com/SublimeText/TailwindCSS.git
