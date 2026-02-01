@@ -16,3 +16,6 @@
 [submodule "sublime-json5"]
 	path = sublime-json5
 	url = https://github.com/bschwind/sublime-json5.git
+[submodule "sublime-yarn-lock"]
+	path = sublime-yarn-lock
+	url = https://github.com/alexkuz/sublime-yarn-lock.git
