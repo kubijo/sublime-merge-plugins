@@ -1,18 +1,18 @@
 [submodule "MDX"]
 	path = MDX
-	url = git@github.com:SublimeText/MDX.git
+	url = https://github.com/SublimeText/MDX.git
 [submodule "Sass"]
 	path = Sass
-	url = git@github.com:SublimeText/Sass.git
+	url = https://github.com/SublimeText/Sass.git
 [submodule "protobuf-syntax-highlighting"]
 	path = protobuf-syntax-highlighting
 	url = https://github.com/VcamX/protobuf-syntax-highlighting.git
 [submodule "rust-enhanced"]
 	path = rust-enhanced
-	url = git@github.com:rust-lang/rust-enhanced.git
+	url = https://github.com/rust-lang/rust-enhanced.git
 [submodule "sublime-nix"]
 	path = sublime-nix
-	url = git@github.com:wmertens/sublime-nix.git
+	url = https://github.com/wmertens/sublime-nix.git
 [submodule "sublime-json5"]
 	path = sublime-json5
 	url = https://github.com/bschwind/sublime-json5.git

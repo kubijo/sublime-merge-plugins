@@ -1,0 +1,56 @@
+name: Bump submodules
+
+on:
+  schedule:
+    - cron: "0 6 * * *" # daily at 06:00 UTC
+  workflow_dispatch: # allow manual trigger
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Update all submodules to latest
+        run: git submodule update --remote
+
+      - name: Check for changes
+        id: changes
+        run: |
+          if git diff --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build commit message
+        if: steps.changes.outputs.changed == 'true'
+        id: message
+        run: |
+          {
+            echo 'body<<EOF'
+            echo 'Updated submodules:'
+            echo ''
+            git diff --name-only | while read -r sub; do
+              old=$(git diff -- "$sub" | grep -oP '(?<=^-Subproject commit )\w+')
+              new=$(git diff -- "$sub" | grep -oP '(?<=^\+Subproject commit )\w+')
+              echo "- **${sub}**: \`${old:0:7}\` → \`${new:0:7}\`"
+            done
+            echo 'EOF'
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Create Pull Request
+        if: steps.changes.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: "Bump submodules"
+          branch: auto/bump-submodules
+          delete-branch: true
+          title: "Bump submodules"
+          body: ${{ steps.message.outputs.body }}
