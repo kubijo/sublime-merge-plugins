@@ -41,16 +41,29 @@ jobs:
               url=$(git config --file .gitmodules "submodule.${sub}.url" | sed 's/\.git$//')
               echo "### ${sub}"
               echo "[\`${old:0:7}\` → \`${new:0:7}\`](${url}/compare/${old}...${new})"
+              echo ""
               git -C "$sub" fetch --unshallow 2>/dev/null || true
-              commits=$(git -C "$sub" log --oneline --no-decorate "${old}..${new}" 2>/dev/null || true)
+              commits=$(git -C "$sub" log --oneline --no-decorate --no-merges "${old}..${new}" 2>/dev/null || true)
               if [ -n "$commits" ]; then
+                echo "**Commits:**"
                 echo "$commits" | while IFS= read -r line; do
                   hash=${line%% *}
                   msg=${line#* }
                   echo "- [\`${hash}\`](${url}/commit/${hash}) ${msg}"
                 done
+                echo ""
               fi
-              echo ""
+              diffstat=$(git -C "$sub" diff --stat "${old}..${new}" 2>/dev/null || true)
+              if [ -n "$diffstat" ]; then
+                echo "<details>"
+                echo "<summary>Files changed</summary>"
+                echo ""
+                echo '```'
+                echo "$diffstat"
+                echo '```'
+                echo "</details>"
+                echo ""
+              fi
             done
             echo 'EOF'
           } >> "$GITHUB_OUTPUT"
