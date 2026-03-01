@@ -35,12 +35,22 @@ jobs:
         run: |
           {
             echo 'body<<EOF'
-            echo 'Updated submodules:'
-            echo ''
             git diff --name-only | while read -r sub; do
               old=$(git diff -- "$sub" | grep -oP '(?<=^-Subproject commit )\w+')
               new=$(git diff -- "$sub" | grep -oP '(?<=^\+Subproject commit )\w+')
-              echo "- **${sub}**: \`${old:0:7}\` → \`${new:0:7}\`"
+              url=$(git config --file .gitmodules "submodule.${sub}.url" | sed 's/\.git$//')
+              echo "### ${sub}"
+              echo "[\`${old:0:7}\` → \`${new:0:7}\`](${url}/compare/${old}...${new})"
+              git -C "$sub" fetch --unshallow 2>/dev/null || true
+              commits=$(git -C "$sub" log --oneline --no-decorate "${old}..${new}" 2>/dev/null || true)
+              if [ -n "$commits" ]; then
+                echo "$commits" | while IFS= read -r line; do
+                  hash=${line%% *}
+                  msg=${line#* }
+                  echo "- [\`${hash}\`](${url}/commit/${hash}) ${msg}"
+                done
+              fi
+              echo ""
             done
             echo 'EOF'
           } >> "$GITHUB_OUTPUT"
