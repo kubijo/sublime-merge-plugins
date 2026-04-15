@@ -20,14 +20,14 @@ git clone --recursive git@github.com:kubijo/sublime-merge-plugins.git my-collect
 
 ```bash
 # Add a new plugin
-make add URL=https://github.com/user/sublime-something
+just add https://github.com/user/sublime-something
 
 # Update all plugins to latest upstream
-make update
+just update
 
 # Remove a plugin
-make remove NAME=plugin-name
+just remove plugin-name
 
 # List all plugins
-make list
+just list
 ```

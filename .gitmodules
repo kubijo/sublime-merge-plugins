@@ -37,3 +37,6 @@
 [submodule "TailwindCSS"]
 	path = TailwindCSS
 	url = https://github.com/SublimeText/TailwindCSS.git
+[submodule "just_sublime"]
+	path = just_sublime
+	url = https://github.com/nk9/just_sublime.git
