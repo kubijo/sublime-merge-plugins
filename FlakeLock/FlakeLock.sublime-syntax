@@ -1,0 +1,10 @@
+%YAML 1.2
+---
+name: Flake Lock
+scope: source.json.flake-lock
+hidden: true
+hidden_file_extensions:
+  - flake.lock
+contexts:
+  main:
+    - include: Packages/JSON/JSON.sublime-syntax
