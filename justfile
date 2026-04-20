@@ -29,3 +29,15 @@ list:
 # Initial setup after cloning
 init:
     git submodule update --init --recursive
+
+# Hard reset parent repo to origin/HEAD and update submodules (DESTRUCTIVE)
+sync:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    echo "WARNING: This will discard all local changes and reset to origin/HEAD."
+    read -rp "Continue? [y/N] " reply
+    [[ "$reply" =~ ^[Yy]$ ]] || { echo "Aborted."; exit 1; }
+    git fetch origin
+    git reset --hard origin/HEAD
+    git submodule update --init --recursive
+    echo "Synced to origin/HEAD with submodules."
