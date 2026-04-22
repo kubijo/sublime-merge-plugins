@@ -1,11 +1,14 @@
 default:
     @just --list
 
-# Add a new package: just add https://github.com/user/repo
-add url:
+# Add a new package: just add https://github.com/user/repo [local-name]
+add url name='':
     #!/usr/bin/env bash
     set -euo pipefail
-    name=$(basename "{{ url }}" .git)
+    name="{{ name }}"
+    if [ -z "$name" ]; then
+        name=$(basename "{{ url }}" .git)
+    fi
     git submodule add "{{ url }}" "$name"
     git add "$name" .gitmodules
     echo "Added $name - don't forget to commit"
@@ -41,3 +44,7 @@ sync:
     git reset --hard origin/HEAD
     git submodule update --init --recursive
     echo "Synced to origin/HEAD with submodules."
+
+# Update plugins and rebuild bat's syntax cache (when this repo is cloned as ~/.config/bat/syntaxes)
+bat-update: update
+    bat cache --build
