@@ -45,6 +45,17 @@ sync:
     git submodule update --init --recursive
     echo "Synced to origin/HEAD with submodules."
 
-# Update plugins and rebuild bat's syntax cache (when this repo is cloned as ~/.config/bat/syntaxes)
+# Update plugins and rebuild bat's syntax cache (when this repo is cloned as ~/.config/bat/syntaxes).
+# Applies workarounds for Sublime Text 4 grammars that bat's syntect rejects.
 bat-update: update
+    #!/usr/bin/env bash
+    set -euo pipefail
+    # These submodules use `meta_prepend: true` on include-only contexts; syntect rejects them.
+    # User's bat config maps *.mdx -> Markdown, and bat's built-ins cover CSS/Sass.
+    for m in MDX Sass TailwindCSS; do
+        git submodule deinit -f "$m" 2>/dev/null || true
+    done
+    # The main Just grammar is fine; only its Python/Shell embeddings trip syntect.
+    # Dropping them costs language-aware highlighting inside recipe interpolations.
+    rm -rf just_sublime/Syntax/Embeddings
     bat cache --build

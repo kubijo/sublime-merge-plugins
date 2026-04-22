@@ -24,8 +24,12 @@ git clone --recursive git@github.com:kubijo/sublime-merge-plugins.git my-collect
 
 ```bash
 git clone --recursive git@github.com:kubijo/sublime-merge-plugins.git ~/.config/bat/syntaxes
-bat cache --build
+cd ~/.config/bat/syntaxes
+just bat-update
 ```
+
+`just bat-update` also handles future upgrades (`git submodule` reset + cache rebuild +
+workarounds for grammars bat's parser rejects — see the recipe in the `justfile`).
 
 Non-syntax files in each submodule (`plugin.py`, `Completions/`, `Build Systems/`, …) are
 ignored by bat, so the same repo works for both editors.
