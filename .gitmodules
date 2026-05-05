@@ -43,9 +43,6 @@
 [submodule "SublimeJQ"]
 	path = SublimeJQ
 	url = https://github.com/zogwarg/SublimeJQ
-[submodule "TypeScript-TmLanguage"]
-	path = TypeScript-TmLanguage
-	url = https://github.com/microsoft/TypeScript-TmLanguage
 [submodule "sublime-purescript-syntax"]
 	path = sublime-purescript-syntax
 	url = https://github.com/tellnobody1/sublime-purescript-syntax
@@ -55,3 +52,6 @@
 [submodule "sublime-nginx"]
 	path = sublime-nginx
 	url = https://github.com/SublimeText/nginx
+[submodule "TypeScript-TmLanguage"]
+	path = TypeScript-TmLanguage
+	url = https://github.com/braver/TypeScriptSyntax
