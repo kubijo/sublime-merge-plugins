@@ -45,6 +45,11 @@ sync:
     git submodule update --init --recursive
     echo "Synced to origin/HEAD with submodules."
 
+# Run syntax_test_* files of the in-repo grammars against syntect, bat's engine.
+# Builds outside the repo so neither Sublime Merge nor bat scans cargo output.
+test-syntax:
+    cargo run --release --quiet --manifest-path tools/syntax-test/Cargo.toml --target-dir "${XDG_CACHE_HOME:-$HOME/.cache}/sublime-merge-plugins/syntax-test" -- Renode
+
 # Update plugins and rebuild bat's syntax cache (when this repo is cloned as ~/.config/bat/syntaxes).
 # Applies workarounds for Sublime Text 4 grammars that bat's syntect rejects.
 bat-update: update

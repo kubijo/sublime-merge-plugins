@@ -47,6 +47,9 @@ just update
 # Update all plugins and rebuild bat's syntax cache
 just bat-update
 
+# Run syntax tests of the grammars kept in this repo (needs cargo)
+just test-syntax
+
 # Remove a plugin
 just remove plugin-name
 
