@@ -55,3 +55,6 @@
 [submodule "TypeScript-TmLanguage"]
 	path = TypeScript-TmLanguage
 	url = https://github.com/braver/TypeScriptSyntax
+[submodule "RobotFrameworkSyntax"]
+	path = RobotFrameworkSyntax
+	url = https://github.com/Harri/RobotFrameworkSyntax

@@ -15,7 +15,7 @@ add url name='':
 
 # Update all packages to latest upstream (force reset)
 update:
-    git submodule foreach 'git fetch origin && git reset --hard origin/HEAD'
+    git submodule foreach 'git fetch origin && git remote set-head origin --auto && git reset --hard origin/HEAD'
     @echo "Submodules reset to latest upstream - review and commit if desired"
 
 # Remove a package: just remove package-name
