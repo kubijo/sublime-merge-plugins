@@ -58,3 +58,6 @@
 [submodule "RobotFrameworkSyntax"]
 	path = RobotFrameworkSyntax
 	url = https://github.com/Harri/RobotFrameworkSyntax
+[submodule "renode-syntax"]
+	path = renode-syntax
+	url = https://github.com/kubijo/renode-syntax
